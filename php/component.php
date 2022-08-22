@@ -1,0 +1,25 @@
+<?php 
+
+function component($productname, $productprice, $productimg) {
+    $element="
+    
+    <div class=\"col-md-3 col-sm-6 my-3 my-md-0\">
+        <form action=\"index.php\" method=\"post\">
+            <div class=\"card shadow\">
+                <div>
+                    <img src=\"$productimg\" class=\"img-fluid card-img-top\">
+                </div>
+                <div class=\"card-body\">
+                    <h5 class=\"card-title\">$productname</h5>
+                    <p class=\"card-text\">Classic Candle</p>
+                    <h5 class=\"price\">$productprice</h5>
+                    <button type=\"submit\" class=\"btn btn-dark my-3\" name=\"add\">Add to Cart <i class=\"fas fa-shopping-cart\"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    ";
+
+    echo $element;
+}

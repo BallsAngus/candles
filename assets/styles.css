@@ -17,7 +17,7 @@
     padding: 0;
     list-style-type: none;
     text-align: center;
-    font-family: cursive;
+    font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 .logo {
@@ -44,8 +44,7 @@
 .end_div {
     text-align: center;
     color: black;
-    font-family: cursive;
-
+    font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 a:link {
