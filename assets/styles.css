@@ -1,3 +1,7 @@
+* {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
 .body {
     margin: 0;
 }
@@ -35,16 +39,9 @@
     padding: 30px;
 }
 
-.end {
-    background-color: white;
-    margin: 0;
-    padding: 0;
-}
-
 .end_div {
     text-align: center;
     color: black;
-    font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 a:link {
@@ -57,4 +54,20 @@ a:visited {
 
 a:hover {
     text-decoration: underline;
+}
+
+.shopping-cart{
+    padding: 3% 0;
+}
+
+.cart-items + .cart-items{
+    padding: 2% 0;
+}
+
+.price-details h6{
+    padding: 3% 2%;
+}
+
+.cart {
+    padding: 100px;
 }
