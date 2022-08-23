@@ -1,2 +1,2 @@
 # candles
-Mock website for a candle shop.
+Online candle shop model for client.
