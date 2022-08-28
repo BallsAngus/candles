@@ -43,20 +43,21 @@ if (isset($_POST['add'])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="assets/styles.css" rel="stylesheet">
+        <link rel="shortcut icon" href="https://img.icons8.com/fluency/452/spa-candle.png"/>
+        <link rel="stylesheet" href="assets/styles.css?php echo time(); ?>">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.css" integrity="sha512-9nqhm3FWfB00id4NJpxK/wV1g9P2QfSsEPhSSpT+6qrESP6mpYbTfpC+Jvwe2XY27K5mLwwrqYuzqMGK5yC9/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>Kem's Candles</title>
     </head>
-    <body class="bg-light d-flex flex-column min-vh-100">
+    <body class="d-flex flex-column min-vh-100 bg-light">
         <?php 
             require_once("php/header.php");
         ?>
-        <div class="logo">
-            <img src="https://p1-e6eeae93.imageflux.jp/c!/a=2,w=788,u=0/harapecostoreinc/83e17412d61629c396a7.png">
-        </div>
-        <div class="container">
-            <div class="row text-center py-5">
+        <?php 
+            require_once("php/featured.php");
+        ?>
+        <div class="container py-4 position-relative">
+            <div class="row text-center py-1">
                 <?php
                     $result = $database->getData();
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -65,7 +66,7 @@ if (isset($_POST['add'])) {
                 ?>
             </div>
         </div>
-        <footer class="mt-auto">
+        <footer class="mt-auto py-4">
             <div class="end_div"><p>COPYRIGHT</p></div>
             <div class="end_div"><p>©2022 JULIAN TUAZON</p></div>
         </footer>
