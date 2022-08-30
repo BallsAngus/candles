@@ -1,5 +1,5 @@
 <?php
-
+// TODO: Change account pages to PHP components. Fix navbar icons being misaligned on item add.
 //start session to access products
 session_start();
 

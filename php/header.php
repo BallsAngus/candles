@@ -31,14 +31,14 @@
                         </a>
                     </li>
                     <li id="header-acct" class="nav-item dropdown">
-                        <a href="account.php" class="nav-link dropdown-toggle text-decoration-none" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a id="acct-btn" class="nav-link dropdown-toggle text-decoration-none" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <span id="acct-btn" class="fa-inverse fa-solid fa-user-circle fa-xl text-decoration-none"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-decoration-none" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Sign in</a></li>
+                            <li><a class="dropdown-item" href="account.php">Sign in</a></li>
                             <li><a class="dropdown-item" href="#">Track Orders</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Register</a></li>
+                            <li><a class="dropdown-item" href="register.php">Register</a></li>
                         </ul>
                     </li>
                 </ul>
