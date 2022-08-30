@@ -1,7 +1,7 @@
 # candles
 Online candle shop model for client.
 
-### **Preview Images**:
+### **Preview Images** (Outdated):
 ![alt text](https://cdn.discordapp.com/attachments/943690001701548072/1013773257603817502/unknown.png)
 Front page (placeholder logo).
 
