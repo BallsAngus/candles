@@ -3,11 +3,13 @@
 //start session to access products
 session_start();
 
+require_once ("php/AccountDb.php");
 require_once('./php/CreateDb.php');
 require_once('./php/component.php');
 
 // create instance of CreateDb class
 $database = new CreateDb("ProductDb", "ProductTb");
+$acctdb = new AccountDb("Accountdb", "Accounttb");
 
 if (isset($_POST['add'])) {
     // for checking functionality
@@ -23,7 +25,7 @@ if (isset($_POST['add'])) {
             $item_array = array('product_id' => $_POST['product_id']);
 
             $_SESSION['cart'][$count] = $item_array;
-            print_r($_SESSION['cart']);
+            //print_r($_SESSION['cart']);
         }
 
     } else {
@@ -31,7 +33,7 @@ if (isset($_POST['add'])) {
 
         // create new session var
         $_SESSION['cart'][0] = $item_array;
-        print_r($_SESSION['cart']);
+        //print_r($_SESSION['cart']);
     }
 }
 
