@@ -7,6 +7,7 @@ class AccountDb {
     public $dbname;
     public $tablename;
     public $con;
+    public $element = '';
 
     public function __construct($dbname = "NewDb", $tablename = "AccountDb", $servername = "localhost", $username = "root", $password ="")
     {
@@ -62,14 +63,42 @@ class AccountDb {
     public function insert($sql) {
         if (mysqli_query($this->con, $sql)) {
             echo "<script>alert('Successfully registered!')</script>";
-            echo "<script>window.location = 'account.php'</script>";
+            echo "<script>window.location = 'register.php'</script>";
         } else {
             echo "<script>alert('Error registering!')</script>";
-            echo "<script>window.location = 'account.php'</script>";            
+            echo "<script>window.location = 'register.php'</script>";            
         }
     }
 
-    public function validate() {
+    // retrieve account info from database
+    public function retrieve($sql) {
+        $result = mysqli_query($this->con, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    }
 
+    public function login($email) {
+        echo "<script>alert('$email logged in!')</script>";
+        echo "<script>window.location = 'account.php'</script>";
+        $user_query = "SELECT * FROM accounttb WHERE email LIKE '$email'";
+        $update_query = "UPDATE `accounttb` SET logged_in = 1 WHERE email='$email'";
+        $user = mysqli_fetch_assoc(mysqli_query($this->con, $user_query))['username'];
+        // Update log status.
+        mysqli_query($this->con, $update_query);
+        if ($user_query['logged_in'] == 0) {
+            $this->element = "<li><a class=\"dropdown-item\" href=\"account.php\">Sign in</a></li>
+            <li><a class=\"dropdown-item\" href=\"#\">Track Orders</a></li>
+            <li><hr class=\"dropdown-divider\"></li>
+            <li><a class=\"dropdown-item\" href=\"register.php\">Register</a></li>";
+        } else {
+            $this->element = "<li><a class=\"dropdown-item\" href=\"account.php\">$user's Settings</a></li>
+            <li><a class=\"dropdown-item\" href=\"#\">Track Orders</a></li>
+            <li><hr class=\"dropdown-divider\"></li>
+            <li><a class=\"dropdown-item\" href=\"register.php\">Sign Out</a></li>";
+        }
+    }
+
+    public function updateDropdown() {
+        echo $this->element;
     }
 }
