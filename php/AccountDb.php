@@ -81,8 +81,7 @@ class AccountDb {
             $user_query = "SELECT * FROM accounttb WHERE email LIKE '$email'";
             $update_query = "UPDATE `accounttb` SET logged_in = 1 WHERE email='$email'";
             $user = mysqli_fetch_assoc(mysqli_query($this->con, $user_query))['username'];
-            $id = $_SESSION['id'];
-            $_SESSION['id'] = $id;
+            $_SESSION['id'] = mysqli_fetch_assoc(mysqli_query($this->con, $user_query))['id'];
             $_SESSION['email'] = $email;
             $_SESSION['username'] = $user;
             // Update log status.

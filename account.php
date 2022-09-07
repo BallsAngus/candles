@@ -4,10 +4,13 @@ session_start();
 
 require_once ("php/AccountDb.php");
 require_once ("php/CreateDb.php");
+require_once('./php/OrdersDb.php');
 require_once ("php/component.php");
 
 $db = new CreateDb("Productdb", "Producttb");
 $acctdb = new AccountDb("Accountdb", "Accounttb");
+$ordersdb = new OrdersDb("Orderdb", "Ordertb");
+
 $email = $password = "";
 $emailErr = $passwdErr = "";
 $validated = True;

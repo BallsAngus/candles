@@ -4,10 +4,12 @@ session_start();
 
 require_once ("php/AccountDb.php");
 require_once ("php/CreateDb.php");
+require_once('./php/OrdersDb.php');
 require_once ("php/component.php");
 
 $db = new CreateDb("Productdb", "Producttb");
 $acctdb = new AccountDb("Accountdb", "Accounttb");
+$ordersdb = new OrdersDb("Orderdb", "Ordertb");
 
 if (isset($_POST['remove'])){
   if ($_GET['action'] == 'remove'){
@@ -21,6 +23,11 @@ if (isset($_POST['remove'])){
   }
 }
 
+if (isset($_POST['checkout'])){
+    unset($_SESSION['cart']);
+    echo "<script>alert('Checkout success!')</script>";
+    echo "<script>window.location = 'cart.php'</script>";
+}
 
 ?>
 
@@ -88,6 +95,9 @@ if (isset($_POST['remove'])){
                             <h6>Delivery Fee</h6>
                             <hr>
                             <h6>Total</h6>
+                            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+                                <button type="submit" class="btn btn-outline-success mt-2 mb-4" name="checkout">Checkout</button>
+                            </form>
                         </div>
                         <div class="col-md-6">
                             <h6>$<?php echo $total; ?></h6>
