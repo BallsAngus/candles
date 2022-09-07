@@ -7,7 +7,6 @@ class AccountDb {
     public $dbname;
     public $tablename;
     public $con;
-    public $element = '';
 
     public function __construct($dbname = "NewDb", $tablename = "AccountDb", $servername = "localhost", $username = "root", $password ="")
     {
@@ -78,27 +77,35 @@ class AccountDb {
     }
 
     public function login($email) {
-        echo "<script>alert('$email logged in!')</script>";
-        echo "<script>window.location = 'account.php'</script>";
-        $user_query = "SELECT * FROM accounttb WHERE email LIKE '$email'";
-        $update_query = "UPDATE `accounttb` SET logged_in = 1 WHERE email='$email'";
-        $user = mysqli_fetch_assoc(mysqli_query($this->con, $user_query))['username'];
-        // Update log status.
-        mysqli_query($this->con, $update_query);
-        if ($user_query['logged_in'] == 0) {
-            $this->element = "<li><a class=\"dropdown-item\" href=\"account.php\">Sign in</a></li>
-            <li><a class=\"dropdown-item\" href=\"#\">Track Orders</a></li>
-            <li><hr class=\"dropdown-divider\"></li>
-            <li><a class=\"dropdown-item\" href=\"register.php\">Register</a></li>";
-        } else {
-            $this->element = "<li><a class=\"dropdown-item\" href=\"account.php\">$user's Settings</a></li>
-            <li><a class=\"dropdown-item\" href=\"#\">Track Orders</a></li>
-            <li><hr class=\"dropdown-divider\"></li>
-            <li><a class=\"dropdown-item\" href=\"register.php\">Sign Out</a></li>";
+        if (empty($_SESSION['id'])) {
+            $user_query = "SELECT * FROM accounttb WHERE email LIKE '$email'";
+            $update_query = "UPDATE `accounttb` SET logged_in = 1 WHERE email='$email'";
+            $user = mysqli_fetch_assoc(mysqli_query($this->con, $user_query))['username'];
+            $id = $_SESSION['id'];
+            $_SESSION['id'] = $id;
+            $_SESSION['email'] = $email;
+            $_SESSION['username'] = $user;
+            // Update log status.
+            mysqli_query($this->con, $update_query);
+            echo "<script>alert('$email logged in!')</script>";
+            echo "<script>window.location = 'account.php'</script>";
         }
     }
 
-    public function updateDropdown() {
-        echo $this->element;
+    public function loginDropdown() {
+        if (!empty($_SESSION['username'])) {
+            $user = $_SESSION['username'];
+            $element = "<li><a class=\"dropdown-item\" href=\"settings.php\">$user's Settings</a></li>
+            <li><a class=\"dropdown-item\" href=\"#\">Track Orders</a></li>
+            <li><hr class=\"dropdown-divider\"></li>
+            <li><a class=\"dropdown-item\" href=\"logout.php\">Sign Out</a></li>";
+            echo $element;
+        } else {
+            $element = "<li><a class=\"dropdown-item\" href=\"account.php\">Sign in</a></li>
+            <li><a class=\"dropdown-item\" href=\"#\">Track Orders</a></li>
+            <li><hr class=\"dropdown-divider\"></li>
+            <li><a class=\"dropdown-item\" href=\"register.php\">Register</a></li>";
+            echo $element;
+        }
     }
 }

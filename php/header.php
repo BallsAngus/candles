@@ -35,10 +35,9 @@
                             <span id="acct-btn" class="fa-inverse fa-solid fa-user-circle fa-xl text-decoration-none"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-decoration-none" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="account.php">Sign in</a></li>
-                            <li><a class="dropdown-item" href="#">Track Orders</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="register.php">Register</a></li>
+                            <?php
+                                $acctdb->loginDropdown();
+                            ?>
                         </ul>
                     </li>
                 </ul>
