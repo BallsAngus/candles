@@ -59,4 +59,38 @@ class OrdersDb {
             return $result;
         }
     }
+
+    // insert new account data into database
+    public function insert($sql) {
+        if (mysqli_query($this->con, $sql)) {
+            echo "<script>alert('Checkout success!')</script>";
+            echo "<script>window.location = 'cart.php'</script>";
+        } else {
+            echo "<script>alert('Checkout error!')</script>";
+            echo "<script>window.location = 'cart.php'</script>";        
+        }
+    }
+
+    public function random_number($length) {
+        $text = "";
+        if($length < 5)
+        {
+            $length = 5;
+        }
+
+        $len = rand(4,$length);
+
+        for ($i=0; $i < $len; $i++) { 
+            $text .= rand(0,9);
+        }
+
+        return $text;
+    }
+
+    // retrieve account info from database
+    public function retrieve($sql) {
+        $result = mysqli_query($this->con, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    }
 }

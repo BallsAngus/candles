@@ -56,4 +56,11 @@ class CreateDb {
             return $result;
         }
     }
+
+    // retrieve account info from database
+    public function retrieve($sql) {
+        $result = mysqli_query($this->con, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    }
 }

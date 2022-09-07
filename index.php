@@ -5,11 +5,13 @@ session_start();
 
 require_once ("php/AccountDb.php");
 require_once('./php/CreateDb.php');
+require_once('./php/OrdersDb.php');
 require_once('./php/component.php');
 
 // create instance of CreateDb class
 $database = new CreateDb("ProductDb", "ProductTb");
 $acctdb = new AccountDb("Accountdb", "Accounttb");
+$ordersdb = new OrdersDb("Orderdb", "Ordertb");
 
 if (isset($_POST['add'])) {
     // for checking functionality

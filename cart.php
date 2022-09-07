@@ -11,22 +11,37 @@ $db = new CreateDb("Productdb", "Producttb");
 $acctdb = new AccountDb("Accountdb", "Accounttb");
 $ordersdb = new OrdersDb("Orderdb", "Ordertb");
 
-if (isset($_POST['remove'])){
-  if ($_GET['action'] == 'remove'){
-      foreach ($_SESSION['cart'] as $key => $value){
-          if($value["product_id"] == $_GET['id']){
-              unset($_SESSION['cart'][$key]);
+if (isset($_POST['remove'])) {
+  if ($_GET['action'] == 'remove') {
+    foreach ($_SESSION['cart'] as $key => $value) {
+        if($value["product_id"] == $_GET['id']) {
+            unset($_SESSION['cart'][$key]);
             //   echo "<script>alert('Product has been Removed...!')</script>";
             //   echo "<script>window.location = 'cart.php'</script>";
-          }
-      }
-  }
+            }
+        } 
+    } 
 }
 
 if (isset($_POST['checkout'])){
+    foreach ($_SESSION['cart'] as $key => $value) {
+        $product_id = $value["product_id"];
+        $sql = "SELECT * FROM producttb WHERE id LIKE '$product_id'";
+        $result_query = $db->retrieve($sql);
+
+
+        $product_price = $result_query["product_price"];
+        $product_image = $result_query["product_image"];
+        $user_order_id = $ordersdb->random_number(10);
+        $email = "";
+        if (!empty($_SESSION['email'])) {
+            $email = $_SESSION['email'];
+        }
+        $sql = "INSERT INTO Ordertb VALUES (default, '$product_id',
+        '$product_price', '$product_image', $user_order_id, '$email', 1)";
+        $ordersdb->insert($sql);
+    }
     unset($_SESSION['cart']);
-    echo "<script>alert('Checkout success!')</script>";
-    echo "<script>window.location = 'cart.php'</script>";
 }
 
 ?>
