@@ -30,6 +30,7 @@ if (isset($_POST['login'])) {
             $validated = False;
         } else {
             $validated = True;
+            $_SESSION['email'] = $email;
         }
     }
 

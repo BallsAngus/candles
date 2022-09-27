@@ -95,13 +95,13 @@ class AccountDb {
         if (!empty($_SESSION['username'])) {
             $user = $_SESSION['username'];
             $element = "<li><a class=\"dropdown-item\" href=\"settings.php\">$user's Settings</a></li>
-            <li><a class=\"dropdown-item\" href=\"#\">Track Orders</a></li>
+            <li><a class=\"dropdown-item\" href=\"track_orders.php\">Track Orders</a></li>
             <li><hr class=\"dropdown-divider\"></li>
             <li><a class=\"dropdown-item\" href=\"logout.php\">Sign Out</a></li>";
             echo $element;
         } else {
             $element = "<li><a class=\"dropdown-item\" href=\"account.php\">Sign in</a></li>
-            <li><a class=\"dropdown-item\" href=\"#\">Track Orders</a></li>
+            <li><a class=\"dropdown-item\" href=\"track_orders.php\">Track Orders</a></li>
             <li><hr class=\"dropdown-divider\"></li>
             <li><a class=\"dropdown-item\" href=\"register.php\">Register</a></li>";
             echo $element;

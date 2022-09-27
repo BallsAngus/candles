@@ -29,7 +29,7 @@ if (isset($_POST['checkout'])){
         $sql = "SELECT * FROM producttb WHERE id LIKE '$product_id'";
         $result_query = $db->retrieve($sql);
 
-
+        $product_name = $result_query["product_name"];
         $product_price = $result_query["product_price"];
         $product_image = $result_query["product_image"];
         $user_order_id = $ordersdb->random_number(10);
@@ -37,7 +37,7 @@ if (isset($_POST['checkout'])){
         if (!empty($_SESSION['email'])) {
             $email = $_SESSION['email'];
         }
-        $sql = "INSERT INTO Ordertb VALUES (default, '$product_id',
+        $sql = "INSERT INTO Ordertb VALUES (default, '$product_name',
         '$product_price', '$product_image', $user_order_id, '$email', 1)";
         $ordersdb->insert($sql);
     }
