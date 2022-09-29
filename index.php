@@ -24,7 +24,7 @@ if (isset($_POST['add'])) {
             echo "<script>window.location = 'index.php'</script>";
         } else {
             $count = count($_SESSION['cart']);
-            $item_array = array('product_id' => $_POST['product_id']);
+            $item_array = array('product_id' => $_POST['product_id'], 'amt' => 1);
 
             $_SESSION['cart'][$count] = $item_array;
             //print_r($_SESSION['cart']);

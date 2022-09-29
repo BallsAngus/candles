@@ -25,9 +25,11 @@ function component($productname, $productprice, $productimg, $productid) {
     echo $element;
 }
 
-function cartElement($productimg, $productname, $productprice, $productid){
+// ids are not zero indexed
+function cartElement($productimg, $productname, $productprice, $productid, $button_id){
     $element = "
-    
+    <form action=\"cart.php\" id=\"update_add\" method=\"post\" class=\"py-2\"></form>
+    <form action=\"cart.php\" id=\"update_sub\" method=\"post\" class=\"py-2\"></form>
     <form action=\"cart.php?action=remove&id=$productid\" method=\"post\" class=\"cart-items\">
                     <div class=\"border rounded\">
                         <div class=\"row bg-white\">
@@ -37,15 +39,15 @@ function cartElement($productimg, $productname, $productprice, $productid){
                             <div class=\"col-md-6\">
                                 <h5 class=\"pt-2\">$productname</h5>
                                 <hr my-2>
-                                <h5 class=\"pt-2\">$$productprice</h5>
+                                <h5 class=\"pt-2\" id=\"price$button_id\">$$productprice</h5>
                                 <button type=\"submit\" class=\"btn btn-dark\">Save for Later</button>
                                 <button type=\"submit\" class=\"btn btn-danger mx-2\" name=\"remove\">Remove</button>
                             </div>
                             <div class=\"col-md-3 py-5 my-5\">
                                 <div>
-                                    <button type=\"button\" class=\"btn bg-light border rounded-circle\"><i class=\"fas fa-minus\"></i></button>
-                                    <input type=\"text\" value=\"1\" class=\"form-control w-25 d-inline\">
-                                    <button type=\"button\" class=\"btn bg-light border rounded-circle\"><i class=\"fas fa-plus\"></i></button>
+                                    <button type=\"button\" class=\"btn bg-light border rounded-circle subtract\" id=\"sub$button_id\"><i class=\"fas fa-minus\" form=\"update_sub\"></i></button>
+                                    <input type=\"text\" value=\"1\" class=\"form-control w-25 d-inline amt\" id=\"amt$button_id\" name=\"amt$button_id\" form=\"checkout\">
+                                    <button type=\"button\" class=\"btn bg-light border rounded-circle add\" id=\"add$button_id\"><i class=\"fas fa-plus\" form=\"update_add\"></i></button>
                                 </div>
                             </div>
                         </div>

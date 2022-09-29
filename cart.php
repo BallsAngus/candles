@@ -37,12 +37,22 @@ if (isset($_POST['checkout'])){
         if (!empty($_SESSION['email'])) {
             $email = $_SESSION['email'];
         }
+        $amount_id = "amt" . $product_id;
+        $amount = $_POST[$amount_id];
         $sql = "INSERT INTO Ordertb VALUES (default, '$product_name',
-        '$product_price', '$product_image', $user_order_id, '$email', 1)";
+        '$product_price', '$product_image', $user_order_id, '$email', $amount)";
         $ordersdb->insert($sql);
     }
     unset($_SESSION['cart']);
 }
+
+// if (isset($_POST['update_add'])){
+//     $product_info = $_SESSION['cart'][];
+// }
+
+// if (isset($_POST['update_sub'])){
+
+// }
 
 ?>
 
@@ -80,7 +90,7 @@ if (isset($_POST['checkout'])){
                         while ($row = mysqli_fetch_assoc($result)){
                             foreach ($product_id as $id){
                                 if ($row['id'] == $id){
-                                    cartElement($row['product_image'], $row['product_name'],$row['product_price'], $row['id']);
+                                    cartElement($row['product_image'], $row['product_name'],$row['product_price'], $row['id'], $id);
                                     $total = $total + $row['product_price'];
                                 }
                             }
@@ -110,7 +120,7 @@ if (isset($_POST['checkout'])){
                             <h6>Delivery Fee</h6>
                             <hr>
                             <h6>Total</h6>
-                            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+                            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post"  id="checkout">
                                 <button type="submit" class="btn btn-outline-success mt-2 mb-4" name="checkout">Checkout</button>
                             </form>
                         </div>
