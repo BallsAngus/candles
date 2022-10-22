@@ -17,8 +17,6 @@ class OrdersDb {
     public $active_group;
     public $query_builder;
     // Connect to DB
-    public $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
-
     public function __construct($dbname = "NewDb", $tablename = "AccountDb", $servername = "localhost", $username = "root", $password ="")
     {
         $this->dbname = $dbname;
