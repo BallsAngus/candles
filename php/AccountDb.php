@@ -7,6 +7,17 @@ class AccountDb {
     public $dbname;
     public $tablename;
     public $con;
+    
+    //Get Heroku ClearDB connection information
+    public $cleardb_url;
+    public $cleardb_server;
+    public $cleardb_username;
+    public $cleardb_password;
+    public $cleardb_db;
+    public $active_group;
+    public $query_builder;
+    // Connect to DB
+    public $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 
     public function __construct($dbname = "NewDb", $tablename = "AccountDb", $servername = "localhost", $username = "root", $password ="")
     {
@@ -15,8 +26,17 @@ class AccountDb {
         $this->servername = $servername;
         $this->password = $password;
 
+        $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+        $cleardb_server = $cleardb_url["host"];
+        $cleardb_username = $cleardb_url["user"];
+        $cleardb_password = $cleardb_url["pass"];
+        $cleardb_db = substr($cleardb_url["path"],1);
+        $active_group = 'default';
+        $query_builder = TRUE;
+
         // create connection
-        $this->con = mysqli_connect($servername, $username, $password);
+        // $this->con = mysqli_connect($servername, $username, $password); // local connection
+        $this->con = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 
         // check connection
         if (!$this->con) {
@@ -28,7 +48,7 @@ class AccountDb {
 
         // execute query
         if (mysqli_query($this->con, $sql)) {
-            $this->con = mysqli_connect($servername, $username, $password, $dbname);
+            $this->con = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
             // sql to create new table
             $sql = "CREATE TABLE IF NOT EXISTS $tablename
                     (id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
