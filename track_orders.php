@@ -61,7 +61,7 @@ if (isset($_POST['cancel'])){
                         echo "<h5>Log in to track your orders!</h5>";
                     } else {
                         $email = $_SESSION['email'];
-                        $query = "SELECT product_name, product_price, product_image, user_order_id FROM ordertb WHERE email LIKE '$email'";
+                        $query = "SELECT product_name, product_price, product_image, user_order_id, amount FROM ordertb WHERE email LIKE '$email'";
                         $result = $ordersdb->query($query);
                         // Add a num orders column to accounts database so this operation becomes constant rather than linear.
                         if ($result->num_rows !== 0) {
@@ -69,7 +69,7 @@ if (isset($_POST['cancel'])){
                             $_SESSION["orders"] = [];
                             foreach ($orders as &$value) {
                                 array_push($_SESSION["orders"], $value);
-                                order_component($value[0], $value[1], $value[2], $value[3]);
+                                order_component($value[0], $value[1], $value[2], $value[3], $value[4]);
                             }
                         } else {
                             echo "<h5>You have no orders</h5>";

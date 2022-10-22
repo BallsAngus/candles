@@ -58,7 +58,7 @@ function cartElement($productimg, $productname, $productprice, $productid, $butt
     echo $element;
 }
 
-function order_component($productname, $productprice, $productimg, $order_id) {
+function order_component($productname, $productprice, $productimg, $order_id, $amount) {
     $element = "
     
     <form action=\"track_orders.php?action=cancel&id=$order_id\" method=\"post\" class=\"cart-items\">
@@ -74,6 +74,9 @@ function order_component($productname, $productprice, $productimg, $order_id) {
                                 <button type=\"submit\" class=\"btn btn-danger\" name=\"cancel\">Cancel</button>
                             </div>
                             <div class=\"col-md-3 py-5 my-5\">
+                                <div>
+                                    <p>Amount: $amount</p>
+                                </div>
                             </div>
                         </div>
                     </div>
